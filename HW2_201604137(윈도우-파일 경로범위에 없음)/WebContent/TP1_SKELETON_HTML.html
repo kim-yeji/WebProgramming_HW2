@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+<title>TODO in HTML5 Skeleton</title>
+<!-- CSS, JS External 정의 -->
+<link rel="stylesheet" type="text/css" href="AddToDo_CSS.css">
+<link rel="stylesheet" type="text/css" href="TP1_SKELETON_CSS.css">
+<script src="AddToDo_JS.js"></script>
+<script src="TP1_SKELETON_JS.js?v=1234"></script>
+<script>
+$(document).ready(function(){
+	
+	loadPage();
+	
+	$(document).on("click",".iBox",function(e){
+		if(!$(e.target).hasClass('noClick')){
+	  		modPopup($(this));
+		}
+	});
+	
+	$(document).on("mouseup","html",function(e){
+		$(this).droppable({
+			drop: function(e){
+				setTimeout(function(){setPrior();},100);
+			}
+		});
+	});
+
+});
+</script>
+</head>
+
+<body>
+	<div class="wrapper">
+		<div class="header">
+			<div class="lAr">
+				<input type="button" value=" Add ToDo " onclick="addToDo()">
+				최종 수정: <span id="nowDate"></span>
+			</div>
+			<div class="rAr">
+				<select id="searchDay" name="searchDay" onchange="searchItem()">
+					<option value="">day</option>
+					<option value="Mon">Mon</option>
+					<option value="Tue">Tue</option>
+					<option value="Wed">Wed</option>
+					<option value="Thu">Thu</option>
+					<option value="Fri">Fri</option>
+				</select>
+
+				<input type="text" id="searchItem" name="searchItem" onkeyup="if(window.event.keyCode == 13){searchItem();}" placeholder="Enter your keyword here" style="width: 200px;" >
+				<input type="button" value=" Delete " onclick="delItem()"  >
+			</div>
+		</div>
+
+
+		<div id="content">
+			<!-- Middle Bar A~D, Display Area A~D -->
+			<div id="Mon" class="middle" >
+				<div class="middleTop"><strong>Mon</strong></div>
+				<div class="displayArea" ></div>
+			</div>
+			<!--경계선-->
+			<div class="mainLine"></div>
+
+			<div id="Tue" class="middle">
+				<div class="middleTop"><strong>Tue</strong></div>
+				<div class="displayArea" ></div>
+			</div>
+			<div class="mainLine"></div>
+
+			<div id="Wed" class="middle">
+				<div class="middleTop"><strong>Wed</strong></div>
+				<div class="displayArea" ></div>
+			</div>
+			<div class="mainLine"></div>
+
+			<div id="Thu" class="middle">
+				<div class="middleTop"><strong>Thu</strong></div>
+				<div class="displayArea"></div>
+			</div>
+			<div class="mainLine"></div>
+
+			<div id="Fri" class="middle">
+				<div class="middleTop"><strong>Fri</strong></div>
+				<div class="displayArea" ></div>
+			</div>
+
+		</div>
+	</div>
+
+<!--/////////////////////////////////////////////////////////////////////////-->
+
+	<div id="layerId" class="layer">
+		<div id="backLayer" class="bg"></div>
+		<div id="addLayer" class="pop-layer" style="width: 400px; padding: 10px;">
+			<div class="layerHeader rAr">
+				<img  id="btnClose" src="img/delete.png" alt="x" onclick="function()">
+			</div>
+			<div class="layerContent">
+				<div class="ctgr">
+					<select id="itemDay" name="itemDay" style="width: 100%;">
+						<option value="Mon">Monday</option>
+						<option value="Tue">Tuesday</option>
+						<option value="Wed">Wednesday</option>
+						<option value="Thu">Thursday</option>
+						<option value="Fri">Friday</option>
+					</select>
+				</div>
+				<div class="ctgr" id="priorDiv">
+					<input type="text" id="itemPrior" name="itemPrior" placeholder="Priority" style="width: 100%;" >
+				</div>
+				<div class="ctgr">
+					<input type="text" id="itemName" name="itemName" placeholder="Item" style="width: 100%;" >
+				</div>
+				<div class="ctgr">
+					<textarea rows="5" id="itemContent" name="itemContent" placeholder="Content" style="width: 100%;"></textarea>
+				</div>
+				<div class="ctgr rAr">
+					<input type="button" id="btnLayer" value="Add" style="width: 100px;" >
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+</body>
+
+</html>
